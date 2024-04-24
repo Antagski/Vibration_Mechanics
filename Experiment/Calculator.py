@@ -144,23 +144,16 @@ def _to_1(M):
 
 def _gram_schmidt(matrix):
     matrix = np.array(matrix, dtype=float)
-    # 获取矩阵的行数和列数
     num_rows, num_cols = matrix.shape
-
-    # 创建一个空矩阵，用于存储正交化后的向量
     orthogonal_matrix = np.zeros((num_rows, num_cols))
-
-    # 对第一个向量直接进行单位化
     orthogonal_matrix[:, 0] = matrix[:, 0] / np.linalg.norm(matrix[:, 0])
 
     # 对剩余的向量进行施密特正交化
     for i in range(1, num_cols):
-        # 计算投影
         projection = np.zeros(num_rows)
         for j in range(i):
             projection += np.dot(matrix[:, i], orthogonal_matrix[:, j]) * orthogonal_matrix[:, j]
 
-        # 计算正交向量
         orthogonal_matrix[:, i] = matrix[:, i] - projection
 
         # 单位化正交向量
