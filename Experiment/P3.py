@@ -1,5 +1,3 @@
-import matplotlib.pyplot as plt
-import numpy as np
 import sympy as sp
 from Calculator import Theoretical_Solve, Matrix_Iteration, Sub_Space_Matrix_Iteration
 
