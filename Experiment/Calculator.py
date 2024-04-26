@@ -164,9 +164,9 @@ def _gram_schmidt(matrix):
 
 
 if __name__ == '__main__':
+    """
     M = sp.Matrix([[1, 0], [0, 2]])
     K = sp.Matrix([[2, -1], [-1, 3]])
-
     M = sp.Matrix([[1, 0, 0, 0],
                    [0, 1, 0, 0],
                    [0, 0, 1, 0],
@@ -175,17 +175,15 @@ if __name__ == '__main__':
                    [-1, 3, -1, 0],
                    [-1, -1, 4, -1],
                    [-1, 0, -1, 3]])
-    """
     M = sp.Matrix([[1, 0, 0],
                    [0, 1, 0],
                    [0, 0, 2]])
     K = sp.Matrix([[2, -1, 0],
                    [-1, 3, -2],
                    [0, -2, 2]])
-    
     M = sp.Matrix([[1, 0, 0], [0, 2, 0], [0, 0, 1]])
     K = sp.Matrix([[1, -1, 0], [-1, 2, -1], [0, -1, 1]])
     """
-    Theoretical_Solve(K, M, True)
-    Matrix_Iteration(K, M)
-    Sub_Space_Matrix_Iteration(K, M)
+    # Theoretical_Solve(K, M, True)
+    # Matrix_Iteration(K, M)
+    # Sub_Space_Matrix_Iteration(K, M)
