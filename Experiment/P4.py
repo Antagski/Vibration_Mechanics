@@ -165,7 +165,6 @@ def plotting(alpha, zeta, miu, loss, mode='alpha'):
     else:
         plt.suptitle('Zeta Optimization')
 
-
     print(f"Alpha: {alpha}\nZeta: {zeta}")
 
     plt.show()
