@@ -135,6 +135,8 @@ def find_alpha(zeta, miu):
         l_data.append(l.detach().numpy())
 
     plotting(alpha=alpha, zeta=zeta, miu=miu, loss=l_data)
+    _alpha = float(alpha[0].detach().numpy())
+    return _alpha
 
 
 def plotting(alpha, zeta, miu, loss, mode='alpha'):
@@ -165,11 +167,13 @@ def plotting(alpha, zeta, miu, loss, mode='alpha'):
     else:
         plt.suptitle('Zeta Optimization')
 
+
     print(f"Alpha: {alpha}\nZeta: {zeta}")
 
     plt.show()
 
 
 if __name__ == "__main__":
-    find_alpha(zeta=0.5, miu=0.2)
-    find_zeta(alpha=1.0, miu=0.2)
+    alpha = find_alpha(zeta=0.5, miu=0.2)
+    # alpha = 0.8270918130874634
+    find_zeta(alpha=alpha, miu=0.2)
