@@ -169,7 +169,7 @@ def plotting(alpha, zeta, miu, loss, mode='alpha'):
 
 
     print(f"Alpha: {alpha}\nZeta: {zeta}")
-
+    plt.subplots_adjust(hspace=0.5)
     plt.show()
 
 
