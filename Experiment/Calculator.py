@@ -10,12 +10,17 @@ def Theoretical_Solve(K, M, plot_flag=False):
     eigen_vals, eigen_vectors = np.linalg.eig(eigen_matrix)
 
     eigen_vals = np.sqrt(eigen_vals)
+    eigen_vals = np.sort(eigen_vals)
 
     if plot_flag:
+        print("\n#####################\n"
+              "# Theoretical Solve #\n"
+              "#####################\n")
         print("Modal Matrix After Orthogonalization:")
-        sp.pprint(_to_1(eigen_vectors))
+        sp.pprint(_gram_schmidt(eigen_vectors))
         print("\nMain Frequency:")
         sp.pprint(list(eigen_vals))
+        
         plot_mode_shape_diagram(eigen_vectors)
 
     return eigen_vectors
@@ -23,8 +28,8 @@ def Theoretical_Solve(K, M, plot_flag=False):
 
 def plot_mode_shape_diagram(phi):
     phi = np.array(phi)
-    fig, axs = plt.subplots(phi.shape[0])
-    for i in range(phi.shape[0]):
+    fig, axs = plt.subplots(phi.shape[1])
+    for i in range(phi.shape[1]):
         x = range(phi.shape[0] + 2)
         y = phi[:, i].tolist()
         y = [0] + y + [0]
@@ -66,12 +71,18 @@ def Matrix_Iteration(K, M, phi=[], error=1e-5, epoch_num=15):
         iiter[i] = epoch_i
     # phi = np.array(phi, dtype=float)
     # omega = np.array(omega, dtype=float)
+    print("\n##########################\n"
+          "# Matrix Iteration Solve #\n"
+          "##########################\n")
     print("\nModel Matrix:")
     sp.pprint(phi)
     print("\nMain Frequency:")
+    omega = list(omega)
+    omega.sort()
     sp.pprint(omega)
-    print("\nEpoch Numbers:")
-    sp.pprint(iiter)
+    plot_mode_shape_diagram(phi)
+    # print("\nEpoch Numbers:")
+    # sp.pprint(iiter)
 
 
 def _iteration(D, phi_0, error, epoch_num):
@@ -104,13 +115,20 @@ def Sub_Space_Matrix_Iteration(K: sp.Matrix, M: sp.Matrix, D: sp.Matrix = sp.Mat
                                r=None, error=1e-3, epoch_num=30):
     _phi = phi - last_phi
     if epoch_num == 0:
-        print("Out of epoch_num")
-        print("Ans:\n")
+        # print("Out of epoch_num")
+        print("\n####################################\n"
+              "# Sub Space Matrix Iteration Solve #"
+              "\n####################################\n")
         sp.pprint(last_phi)
+        plot_mode_shape_diagram(last_phi)
+        
         return last_phi
     elif _phi != sp.Matrix([]) and _phi.norm(1) <= error:
-        print("Ans:\n")
+        print("\n####################################\n"
+              "# Sub Space Matrix Iteration Solve #"
+              "\n####################################\n")
         sp.pprint(last_phi)
+        plot_mode_shape_diagram(last_phi)
         return last_phi
 
     if phi == sp.Matrix([]):
@@ -167,6 +185,7 @@ if __name__ == '__main__':
     """
     M = sp.Matrix([[1, 0], [0, 2]])
     K = sp.Matrix([[2, -1], [-1, 3]])
+    """
     M = sp.Matrix([[1, 0, 0, 0],
                    [0, 1, 0, 0],
                    [0, 0, 1, 0],
@@ -175,6 +194,7 @@ if __name__ == '__main__':
                    [-1, 3, -1, 0],
                    [-1, -1, 4, -1],
                    [-1, 0, -1, 3]])
+    """
     M = sp.Matrix([[1, 0, 0],
                    [0, 1, 0],
                    [0, 0, 2]])
@@ -184,6 +204,6 @@ if __name__ == '__main__':
     M = sp.Matrix([[1, 0, 0], [0, 2, 0], [0, 0, 1]])
     K = sp.Matrix([[1, -1, 0], [-1, 2, -1], [0, -1, 1]])
     """
-    # Theoretical_Solve(K, M, True)
-    # Matrix_Iteration(K, M)
-    # Sub_Space_Matrix_Iteration(K, M)
+    Theoretical_Solve(K, M, True)
+    Matrix_Iteration(K, M)
+    Sub_Space_Matrix_Iteration(K, M)
