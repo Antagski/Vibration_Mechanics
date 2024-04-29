@@ -7,18 +7,18 @@ def Theoretical_Solve(K, M, plot_flag=False):
     eigen_matrix = M.inv() * K
     eigen_matrix = np.array(eigen_matrix, dtype=float)
 
-    eigen_vals, eigen_vetors = np.linalg.eig(eigen_matrix)
+    eigen_vals, eigen_vectors = np.linalg.eig(eigen_matrix)
 
     eigen_vals = np.sqrt(eigen_vals)
 
     if plot_flag:
         print("Modal Matrix After Orthogonalization:")
-        sp.pprint(_to_1(eigen_vetors))
+        sp.pprint(_to_1(eigen_vectors))
         print("\nMain Frequency:")
         sp.pprint(list(eigen_vals))
-        plot_mode_shape_diagram(eigen_vetors)
+        plot_mode_shape_diagram(eigen_vectors)
 
-    return eigen_vetors
+    return eigen_vectors
 
 
 def plot_mode_shape_diagram(phi):
