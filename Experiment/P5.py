@@ -104,7 +104,7 @@ def find_zeta(alpha, miu):
 
         l_data.append(l.detach().numpy())
 
-    plotting(alpha=alpha, zeta=zeta, miu=miu, loss=l_data)
+    plotting(alpha=alpha, zeta=zeta, miu=miu, loss=l_data, mode='zeta')
 
 
 def find_alpha(zeta, miu):
