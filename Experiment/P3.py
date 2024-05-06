@@ -1,5 +1,5 @@
 import sympy as sp
-from Calculator import Theoretical_Solve, Matrix_Iteration, Sub_Space_Matrix_Iteration
+from Calculator import Theoretical_Solve, Matrix_Iteration, Sub_Space_Matrix_Iteration, _to_1
 
 
 if __name__ == '__main__':
@@ -14,4 +14,10 @@ if __name__ == '__main__':
 
     Theoretical_Solve(K, M, True)
     Matrix_Iteration(K, M)
-    Sub_Space_Matrix_Iteration(K, M)
+    phi = sp.randMatrix(M.shape[0], 4)
+    phi = _to_1(phi)
+    for r in [2 ,3, 4]:
+        _phi = phi[:, 0:r]
+        Sub_Space_Matrix_Iteration(K, M, phi=_phi, r=r)
+    print("\nAssumed Mode Matrix:")
+    sp.pprint(phi)
